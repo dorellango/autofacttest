@@ -12,3 +12,4 @@
 */
 
 Route::get('quizzes-chart', 'QuizzesChartController');
+Route::resource('quizzes', 'ApiQuizzesController');
