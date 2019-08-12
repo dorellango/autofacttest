@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateQuizRequest;
 use App\Quiz;
 use Illuminate\Http\Request;
 
@@ -33,15 +34,9 @@ class QuizzesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateQuizRequest $request)
     {
         $this->authorize('create', new Quiz());
-
-        $validated = $request->validate([
-            'suggestions' => 'required|string|max:255',
-            'is_the_information_right' => 'required|in:yes,no,both',
-            'fast_site' => 'required|numeric|max:5|min:1'
-        ]);
 
         $quiz = auth()->user()
         ->quizzes()->create($request->all());
