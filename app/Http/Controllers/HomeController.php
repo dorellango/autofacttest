@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 class HomeController extends Controller
 {
     /**
@@ -23,6 +21,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $lastQuiz = auth()->user()->quizzes()
+            ->latest()->take(1)->first();
+
+        return view('home', compact('lastQuiz'));
     }
 }

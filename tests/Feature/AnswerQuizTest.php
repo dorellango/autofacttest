@@ -28,7 +28,8 @@ class AnswerQuizTest extends TestCase
             'suggestions' => $attributes['suggestions'],
             'is_the_information_right' => 'yes',
             'fast_site' => 5
-        ]);
+        ])
+        ->assertRedirect('home');
 
         $this->assertDatabaseHas('quizzes', $attributes);
     }
