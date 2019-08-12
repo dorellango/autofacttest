@@ -20,7 +20,7 @@ Setear las credenciales de la base de datos en .env, y luego:
 
 # TEST
 
-```vendor/bin/phpunit```
+```vendor/bin/phpunit``` ✅✅✅✅✅✅✅✅
 
 # API
 
