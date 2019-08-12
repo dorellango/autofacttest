@@ -1843,23 +1843,41 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   "extends": vue_chartjs__WEBPACK_IMPORTED_MODULE_0__["Pie"],
+  data: function data() {
+    return {
+      dataSet: null,
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        pieceLabel: {
+          mode: 'percentage',
+          precision: 1
+        }
+      }
+    };
+  },
   props: ['labels'],
   mounted: function mounted() {
-    // Overwriting base render method with actual data.
-    this.renderChart({
-      labels: this.labels,
-      datasets: [{
-        backgroundColor: ['#41B883', '#E46651', '#00D8FF'],
-        data: this.data
-      }]
-    }, {
-      responsive: true,
-      maintainAspectRatio: false,
-      pieceLabel: {
-        mode: 'percentage',
-        precision: 1
-      }
-    });
+    this.fetchData();
+  },
+  methods: {
+    fetchData: function fetchData() {
+      var _this = this;
+
+      window.axios.get('/api/quizzes-chart').then(function (response) {
+        var dataSet = response.data.map(function (i) {
+          return i.total;
+        });
+
+        _this.renderChart({
+          labels: _this.labels,
+          datasets: [{
+            backgroundColor: ['#41B883', '#E46651', '#00D8FF'],
+            data: dataSet
+          }]
+        }, _this.options);
+      });
+    }
   }
 });
 

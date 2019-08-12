@@ -18,7 +18,7 @@ class QuizzesChartController extends Controller
     {
         return Quiz::select([
             'is_the_information_right as answer',
-            DB::raw('COUNT (is_the_information_right)')
+            DB::raw('COUNT(is_the_information_right) as total')
         ])
         ->groupBy('is_the_information_right')
         ->get();

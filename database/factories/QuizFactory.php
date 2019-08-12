@@ -10,7 +10,7 @@ $factory->define(Quiz::class, function (Faker $faker) {
     return [
         'user_id' => factory(User::class)->lazy(),
         'suggestions' => $faker->paragraph(),
-        'is_the_information_right' => 'yes',
+        'is_the_information_right' => $faker->randomElement(['yes', 'no', 'both']),
         'fast_site' => 5
     ];
 });
