@@ -15,7 +15,6 @@ class AnswerQuizTest extends TestCase
     /** @test */
     public function can_answer_the_quiz()
     {
-        $this->withoutExceptionHandling();
         $user = factory(User::class)->create();
 
         $attributes = [
@@ -30,6 +29,48 @@ class AnswerQuizTest extends TestCase
             'is_the_information_right' => 'yes',
             'fast_site' => 5
         ]);
+
+        $this->assertDatabaseHas('quizzes', $attributes);
+    }
+
+    /** @test */
+    public function only_can_answer_a_quizz_per_month()
+    {
+        $previousQuiz = factory(Quiz::class)->create();
+
+        $attributes = [
+            'suggestions' => $this->faker()->paragraph(),
+            'is_the_information_right' => 'yes',
+            'fast_site' => 5
+        ];
+
+        $this->actingAs($previousQuiz->user)
+        ->post('/quizzes', [
+            'suggestions' => $attributes['suggestions'],
+            'is_the_information_right' => 'yes',
+            'fast_site' => 5
+        ])->assertStatus(403);
+
+        $this->assertDatabaseMissing('quizzes', $attributes);
+    }
+
+    /** @test */
+    public function can_answer_if_the_last_quiz_was_a_month_ago()
+    {
+        $previousQuiz = factory(Quiz::class)->create(['created_at' => now()->subMonth()]);
+
+        $attributes = [
+            'suggestions' => $this->faker()->paragraph(),
+            'is_the_information_right' => 'yes',
+            'fast_site' => 5
+        ];
+
+        $this->actingAs($previousQuiz->user)
+        ->post('/quizzes', [
+            'suggestions' => $attributes['suggestions'],
+            'is_the_information_right' => 'yes',
+            'fast_site' => 5
+        ])->assertRedirect('/home');
 
         $this->assertDatabaseHas('quizzes', $attributes);
     }

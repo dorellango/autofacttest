@@ -14,6 +14,15 @@ class Quiz extends Model
     protected $guarded = [];
 
     /**
+     * Attribute casting
+     *
+     * @return void
+     */
+    protected $casts = [
+        'fast_site' => 'integer'
+    ];
+
+    /**
      * It belongs to a user
      *
      * @return void

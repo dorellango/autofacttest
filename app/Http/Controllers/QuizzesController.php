@@ -34,6 +34,14 @@ class QuizzesController extends Controller
      */
     public function store(Request $request)
     {
+        $monthAgoDate = now()->subMonth(1);
+
+        abort_if(
+            auth()->user()->quizzes()
+        ->where('created_at', '>', $monthAgoDate)->get()->isNotEmpty(),
+         403
+        );
+
         $validated = $request->validate([
             'suggestions' => 'required|string|max:255',
             'is_the_information_right' => 'required|in:yes,no,both',
@@ -43,7 +51,7 @@ class QuizzesController extends Controller
         $quiz = auth()->user()
         ->quizzes()->create($request->all());
 
-        return $quiz;
+        return redirect('/home');
     }
 
     /**
