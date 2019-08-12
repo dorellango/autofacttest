@@ -23,4 +23,8 @@ Auth::routes(
     ]
 );
 
+Route::group(['middleware' => ['auth']], function () {
+    Route::resource('quizzes', 'QuizzesController');
+});
+
 Route::get('/home', 'HomeController@index')->name('home');

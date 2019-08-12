@@ -15,8 +15,12 @@ class CreateQuizzesTable extends Migration
     {
         Schema::create('quizzes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
 
+            $table->text('suggestions');
+            $table->enum('is_the_information_right', ['yes', 'no', 'undecided']);
+            $table->unsignedInteger('fast_site');
+
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
