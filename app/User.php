@@ -47,4 +47,14 @@ class User extends Authenticatable
     {
         return $this->is_admin === true;
     }
+
+    /**
+     * It has many quizzes
+     *
+     * @return void
+     */
+    public function quizzes()
+    {
+        return $this->hasMany(Quiz::class);
+    }
 }
