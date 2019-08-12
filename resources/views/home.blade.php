@@ -6,15 +6,31 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
 
-            @cannot('create', Quiz::class)
-            <h1 class="text-gray-100 text-2xl mb-2">Hi! <span class="underline">{{ auth()->user()->name }}</span> you are up to date 🔥🔥🔥 </h1>
-            <h2 class="text-gray-600 text-2xl mb-6">Last quiz was {{ $lastQuiz->created_at->format('d-m-Y H:m') }}</h1>
+            @if(auth()->user()->quizzes->isNotEmpty())
+                <h1 class="text-gray-100 text-2xl mb-2">Hi! <span class="underline">{{ auth()->user()->name }}</span> you are up to date 🔥🔥🔥 </h1>
+                <h2 class="text-gray-600 text-2xl mb-6">Last quiz was {{ $lastQuiz->created_at->format('d-m-Y H:m') }}</h1>
 
-            <div class="p-4 border border-dashed border-gray-800 bg-gray-900 text-gray-100 whitespace-normal"
-                style="overflow-wrap: break-word;">
-                {{ json_encode($lastQuiz) }}
-            </div>
-            @endcannot
+                <div class="p-4 border border-dashed border-gray-800 bg-gray-900 text-gray-100 whitespace-normal"
+                    style="overflow-wrap: break-word;">
+                    <ul>
+                        <li class="mb-2">
+                            <h4 class="text-lg mb-2">¿Qué te gustaría que agregáramos al informe?</h4>
+                            <p class="text-gray-600">{{ $lastQuiz->suggestions }}</p>
+                        </li>
+                        <li class="mb-2">
+                            <h4 class="text-lg mb-2">¿La información es correcta?</h4>
+                            <p class="text-gray-600">{{ trans('answers.is_the_information_right.' . $lastQuiz->is_the_information_right) }}</p>
+                        </li>
+                        <li>
+                            <h4 class="text-lg mb-2">¿Del 1 al 5, es rápido el sitio?</h4>
+                            <p class="text-gray-600">{{ $lastQuiz->fast_site }}</p>
+                        </li>
+                    </ul>
+                    <p class="border-t border-gray-700 pt-2 mt-2">
+                        {{ json_encode($lastQuiz) }}
+                    </p>
+                </div>
+            @endif
 
             @can('create', new App\Quiz())
                 <h1 class="text-gray-100 text-2xl mb-6">Hi! <span class="underline">{{ auth()->user()->name }}</span> you should answer the monthly Quiz! 🗒</h1>
@@ -48,7 +64,7 @@
                                 @enderror
                             </div>
                             <div class="mb-4">
-                                <label for="fast_site" class="uppercase text-sm font-bold">“¿Del 1 al 5, es rápido el sitio?</label>
+                                <label for="fast_site" class="uppercase text-sm font-bold">¿Del 1 al 5, es rápido el sitio?</label>
                                 <select class="form-control" id="fast_site" name="fast_site" required>
                                     <option value="1">1</option>
                                     <option value="2">2</option>

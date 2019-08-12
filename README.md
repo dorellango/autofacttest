@@ -29,6 +29,10 @@ api/quizzes
 api/quizzes-chart
 ```
 
+# Logs
+
+```storage/logs/laravel.log```
+
 
 ## Dentro de estas 4 hrs. debes incluir las mejoras que sugerirías a tu propia solución si tuvieras más tiempo para implementarla, separando por siguientes aspectos:
 
@@ -41,7 +45,8 @@ Quizás con algún campo en JSON a la DB o un nuevo modelo "Question";
 Protegería la API REST con algún token, permitiendo el acceso solo a usuarios autenticados, y por supuesto aquellos que tengan rol de administrador.
 
 ### Escalabilidad
-***
+
+Separando el frontend, backend y base de datos (como parte del mismo servidor), para luego migrar a un ecosistema de microservicios - y en ese caso reemplazar laravel por lumen-. Esto nos permitiria escalar de manera independiente cada aspecto del programa en plataformas como Heroku o AWS.
 
 ### Rendimiento
 Desde el lado del frontend intentaría eliminar las clases en desuso del propio bootstapp y tailwindcss, lo cual haría con alguna librería webpack como: purgecss.
