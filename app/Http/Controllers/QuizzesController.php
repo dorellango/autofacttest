@@ -34,6 +34,12 @@ class QuizzesController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'suggestions' => 'required|string|max:255',
+            'is_the_information_right' => 'required|in:yes,no,both',
+            'fast_site' => 'required|numeric|max:5|min:1'
+        ]);
+
         $quiz = auth()->user()
         ->quizzes()->create($request->all());
 

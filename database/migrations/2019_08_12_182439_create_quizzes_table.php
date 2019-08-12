@@ -17,7 +17,7 @@ class CreateQuizzesTable extends Migration
             $table->bigIncrements('id');
 
             $table->text('suggestions');
-            $table->enum('is_the_information_right', ['yes', 'no', 'undecided']);
+            $table->enum('is_the_information_right', ['yes', 'no', 'both']);
             $table->unsignedInteger('fast_site');
 
             $table->unsignedBigInteger('user_id');
