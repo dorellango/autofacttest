@@ -24,8 +24,10 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "chart.js": "^2.8.0",
         "laravel-mix-purgecss": "^4.1.0",
         "purgecss-webpack-plugin": "^1.5.0",
-        "tailwindcss": "^1.1.1"
+        "tailwindcss": "^1.1.1",
+        "vue-chartjs": "^3.4.2"
     }
 }

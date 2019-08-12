@@ -27,6 +27,11 @@
                             @csrf
                         </form>
                     </li>
+                    @if (auth()->user()->isAdmin())
+                        <li class="ml-4">
+                            <a class="text-gray-100" href="{{ route('quizzes.index') }}">{{ __('Quizzes') }}</a>
+                        </li>
+                    @endif
                 @endguest
             </ul>
         </div>

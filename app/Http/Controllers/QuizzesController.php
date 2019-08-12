@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateQuizRequest;
 use App\Quiz;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class QuizzesController extends Controller
 {
@@ -15,7 +16,15 @@ class QuizzesController extends Controller
      */
     public function index()
     {
-        //
+        abort_unless(
+            auth()->user()->isAdmin(),
+            403,
+            'Only administrators can access to this page'
+        );
+
+        $quizzes = Quiz::paginate();
+
+        return view('quizzes.index', compact('quizzes'));
     }
 
     /**
