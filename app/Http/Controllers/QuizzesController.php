@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Quiz;
 use Illuminate\Http\Request;
 
 class QuizzesController extends Controller
@@ -34,13 +35,7 @@ class QuizzesController extends Controller
      */
     public function store(Request $request)
     {
-        $monthAgoDate = now()->subMonth(1);
-
-        abort_if(
-            auth()->user()->quizzes()
-        ->where('created_at', '>', $monthAgoDate)->get()->isNotEmpty(),
-         403
-        );
+        $this->authorize('create', new Quiz());
 
         $validated = $request->validate([
             'suggestions' => 'required|string|max:255',
