@@ -22,6 +22,14 @@ Setear las credenciales de la base de datos en .env, y luego:
 
 ```vendor/bin/phpunit```
 
+# API
+
+```
+api/quizzes
+api/quizzes-chart
+```
+
+
 ## Dentro de estas 4 hrs. debes incluir las mejoras que sugerirías a tu propia solución si tuvieras más tiempo para implementarla, separando por siguientes aspectos:
 
 ### Arquitectura

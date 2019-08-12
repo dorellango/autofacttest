@@ -28,7 +28,10 @@
                         </form>
                     </li>
                     @if (auth()->user()->isAdmin())
-                        <li class="ml-4">
+                        <li class="mr-2 text-gray-600 font-bold ml-4 pl-4 border-l-2 border-gray-300">
+                            👮‍ ADMIN
+                        </li>
+                        <li class="ml-2">
                             <a class="text-gray-100" href="{{ route('quizzes.index') }}">{{ __('Quizzes') }}</a>
                         </li>
                     @endif
