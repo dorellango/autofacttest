@@ -3,7 +3,7 @@
 ```composer install```
 ```cp .env.example .env```
 
-Setear las credenciales de la base de datos en .env, y luego:
+Fijar las credenciales de la base de datos en .env, y luego:
 
 ```php artisan migrate```
 
@@ -14,7 +14,7 @@ Setear las credenciales de la base de datos en .env, y luego:
 ```php artisan db:seed```
 
 * Se crearán 20 encuestas ya contestadas.
-* Se creará a 1 usuario admin:
+* Se creará 1 usuario admin:
 
 ``` (login) => dev@dorellango.cl | (🔑) => "password" ```
 
@@ -51,16 +51,16 @@ Separando el frontend, backend y base de datos (como parte del mismo servidor), 
 ### Rendimiento
 Desde el lado del frontend intentaría eliminar las clases en desuso del propio bootstapp y tailwindcss, lo cual haría con alguna librería webpack como: purgecss.
 
-Desde el lado del backend intentaría separar la api a su propio microservicio con conexión a la base de datos, dejando esta proyecto solo web.
+Desde el lado del backend intentaría separar la api a su propio microservicio con conexión a la base de datos, dejando este repo solo web.
 
 ### Diseño
 
-Intentaría simplificar aún más los controlladores y crear quizás algun repositorio por cada modelo.
+Intentaría simplificar aún más los controlladores y crear quizás algun repositorio (patron) por cada modelo.
 
 ### Despliegue
 
-Para el **deployment**, y tomando en cuenta que el sitio está desarrolladao en laravel, recomendaría hacer uno de una herramiento como Laravel Forge. De servidor, alguna arquitectura en la nube como AWS.
+Para el **deployment**, y tomando en cuenta que el sitio está desarrolladao en laravel, recomendaría hacer uso de alguna herramienta como Laravel Forge. De servidor, alguna arquitectura en la nube como AWS.
 
 ### Otro
 
-Integraria las pruebas realizadas a un sistema de integración continua CI.
+Integraría las pruebas realizadas a un sistema de integración continua CI.
